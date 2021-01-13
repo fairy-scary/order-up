@@ -1,5 +1,7 @@
 from flask import Blueprint
 from flask_login import current_user
+from ..forms import LoginForm
+from flask import render_template
 
 bp = Blueprint('session', __name__, url_prefix='/session')
 
@@ -18,3 +20,8 @@ def login():
         login_user(employee)
         return redirect(url_for("orders.index"))
     return render_template("login.html", form=form)
+
+    @bp.route('/logout', methods=["POST"])
+    def logout():
+        logout_user()
+        return redirect(url_for('.login'))
