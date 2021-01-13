@@ -1,5 +1,6 @@
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
+from flask_login import UserMixin
 
 db = SQLAlchemy()
 
@@ -7,7 +8,7 @@ db = SQLAlchemy()
 class Employee(db.Model, UserMixin):
     __tablename__ = "employees"
 
-    id = db.Column(db.Integer, primarykey=True)
+    id = db.Column(db.Integer, primary_key=True)
     name= db.Column(db.String(100), nullable=False)
     employee_number = db.Column(db.Integer, nullable=False, unique=True)
     hashed_password = db.Column(db.String(100), nullable=False)
